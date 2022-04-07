@@ -236,6 +236,7 @@
       <div class="contact-details">
         <form
           class="form-details"
+          id="form"
           action="https://formspree.io/f/xjvlodwe"
           method="post"
         >
@@ -270,13 +271,19 @@
             </div>
             <div class="contact-message">
               <label for="message" class="message-area">Message</label>
-              <textarea name="message" id="message" maxlength="500" required>
-Enter your message here</textarea
-              >
+              <textarea
+                name="message"
+                id="message"
+                maxlength="500"
+                rows="4"
+                placeholder="Enter your message here"
+                required
+              ></textarea>
             </div>
           </div>
 
           <div class="contact-button">
+            <div id="log"></div>
             <button type="submit" class="button-type submit">
               Get in touch
             </button>

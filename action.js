@@ -66,7 +66,16 @@ window.onload = function () {
   const portfolio = document.getElementById("portfolio");
   const modals = document.querySelector(".modals");
   const overlay = document.querySelector(".overlay");
+  const log = document.getElementById("log");
+  const form = document.getElementById("form");
+  const email_input = document.getElementById("Email");
+  const username_input = document.getElementById("user-name");
+  const message_input = document.getElementById("message");
+
   let active = "";
+  let email = "";
+  let username = "";
+  let message = "";
 
   function disableScroll() {
     // Get the current page scroll position
@@ -152,6 +161,12 @@ window.onload = function () {
     overlay.classList.remove("active");
   }
 
+  function reset() {
+    username = "";
+    email = "";
+    message = "";
+  }
+
   // Function Call
   addModals();
   addProject();
@@ -198,5 +213,32 @@ window.onload = function () {
     modals.forEach((modal) => {
       closeModal(modal);
     });
+  });
+
+  email_input.addEventListener("input", (e) => {
+    email += e.target.value;
+  });
+
+  username_input.addEventListener("input", (e) => {
+    username += e.target.value;
+  });
+
+  message_input.addEventListener("input", (e) => {
+    message += e.target.value;
+  });
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    console.log(email);
+
+    let caps = /[A-Z]/g;
+
+    if (email.match(caps)) {
+      log.innerText = "The content of email field has to be in lower case";
+      reset();
+      return;
+    } else {
+      reset();
+    }
   });
 };
