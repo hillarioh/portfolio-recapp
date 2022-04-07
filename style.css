@@ -13,43 +13,6 @@ main {
   margin: 0;
 }
 
-.project-item {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  width: 80%;
-  min-height: 50vh;
-  transition: 200ms ease-in-out;
-  border-radius: 10px;
-  z-index: 5;
-  background-color: #fff;
-}
-
-#project1.active,
-#project2.active,
-#project3.active,
-#project4.active {
-  transform: translate(-50%, -50%) scale(1);
-}
-
-.overlay {
-  position: fixed;
-  opacity: 0;
-  transition: 200ms ease-in-out;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(200, 202, 68, 0.5);
-  pointer-events: none;
-}
-
-.overlay.active {
-  opacity: 1;
-  pointer-events: all;
-}
-
 .header {
   background-color: #fff;
   margin: 24px;

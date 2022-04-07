@@ -86,6 +86,10 @@ window.onload = function () {
   function addModals() {
     let modalitem = "";
     projectsArray.forEach((project, i) => {
+      let tags = "";
+      project.tags.forEach((tag) => {
+        tags += `<span>${tag}</span>`;
+      });
       modalitem += `
       <div class="project-item" id="project${i + 1}">
         <div class="item-header">
@@ -93,8 +97,23 @@ window.onload = function () {
           <button data-close-button class="close-button">&times;</button>
         </div>
         <div class="item-body">
-          Lorem ipsum dolor sit amet 
-        </div>
+          <div class="item-details">
+            <span>${project.company}</span>
+            <span class="item-role">${project.role}</span>
+            <span>${project.year}</span>
+          </div>
+          <div class="item-img img${i + 1}">
+            <p>image point</p>
+          </div>
+          <p>${project.modaldesc}</p>
+          <div class="tags">
+            ${tags}
+          </div>
+          <div class="modal-links">
+            <a href="${project.sourceLink}"><span>See live</span></a>
+            <a href="${project.demoLink}"><span>See Source</span></a>
+          </div>
+        </div>        
       </div>`;
     });
     modals.innerHTML = modalitem;
@@ -103,10 +122,17 @@ window.onload = function () {
   function addProject() {
     let proj = "";
     projectsArray.forEach((project, i) => {
+      let tags = "";
+      project.tags.forEach((tag) => {
+        tags += `<span>${tag}</span>`;
+      });
       proj += `<div>
       <img src="${project.imageLink}" />
       <p>${project.title}</p>
       <p>${project.description}</p>
+      <div class="tags">
+        ${tags}
+      </div>
       <button data-modal-target="#project${i + 1}">See Project</button>
       </div>`;
     });
