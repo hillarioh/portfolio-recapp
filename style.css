@@ -13,6 +13,21 @@ main {
   margin: 0;
 }
 
+.project-item {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 80%;
+  transition: 200ms ease-in-out;
+  border-radius: 10px;
+  z-index: 5;
+}
+
+#project.active {
+  transform: translate(-50%, -50%) scale(1);
+}
+
 .header {
   background-color: #fff;
   margin: 24px;
@@ -205,11 +220,11 @@ p {
 }
 
 .grid-container {
-  margin: 16px;
+  /* margin: 16px;
   display: grid;
   grid-template-rows: auto auto auto auto;
   row-gap: 100px;
-  background: #f7f7f9;
+  background: #f7f7f9; */
 }
 
 .template-wrapper {
@@ -683,8 +698,8 @@ textarea:invalid:required {
   }
 
   .grid-container {
-    margin-bottom: 6rem;
-    margin-left: 3rem;
+    /* margin-bottom: 6rem;
+    margin-left: 3rem; */
   }
 
   .template-wrapper {
