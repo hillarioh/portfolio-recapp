@@ -5,7 +5,7 @@ const projectsArray = [
       "A daily selection of privately personalized reads; no accounts or sign-ups required.",
     modaldesc:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it 1960s. Lorem Ipsum han printer took a galley of type and scrambled it 1960s",
-    imageLink: "./images/Snapshoot.png",
+    imageLink: "images/Snapshoot.png",
     tags: ["HTML", "CSS", "Javascript"],
     role: "Back End Dev",
     company: "Canopy",
@@ -19,7 +19,7 @@ const projectsArray = [
       "A daily selection of privately personalized reads; no accounts or sign-ups required.",
     modaldesc:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it 1960s. Lorem Ipsum han printer took a galley of type and scrambled it 1960s",
-    imageLink: "./images/Snap2.png",
+    imageLink: "images/Snap2.png",
     tags: ["HTML", "CSS", "Javascript"],
     role: "Back End Dev",
     company: "Canopy",
@@ -33,7 +33,7 @@ const projectsArray = [
       "A daily selection of privately personalized reads; no accounts or sign-ups required.",
     modaldesc:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it 1960s. Lorem Ipsum han printer took a galley of type and scrambled it 1960s",
-    imageLink: "./images/Snap3.png",
+    imageLink: "images/Snap3.png",
     tags: ["HTML", "CSS", "Javascript"],
     role: "Back End Dev",
     company: "Canopy",
@@ -47,7 +47,7 @@ const projectsArray = [
       "A daily selection of privately personalized reads; no accounts or sign-ups required.",
     modaldesc:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it 1960s. Lorem Ipsum han printer took a galley of type and scrambled it 1960s",
-    imageLink: "/images/Snapshoot.png",
+    imageLink: "images/Snapshoot.png",
     tags: ["HTML", "CSS", "Javascript"],
     role: "Back End Dev",
     company: "Canopy",
@@ -64,15 +64,9 @@ window.onload = function () {
   const links = document.querySelectorAll(".menu-link");
   const main = document.querySelector("main");
   const portfolio = document.getElementById("portfolio");
-  const openModalButtons = document.querySelectorAll("[data-modal-target]");
-  const closeModalButtons = document.querySelectorAll("[data-close-button]");
+  const modals = document.querySelector(".modals");
   const overlay = document.querySelector(".overlay");
   let active = "";
-
-  if (portfolio.childNodes.length > 0) {
-    const op = document.querySelectorAll("[data-modal-target]");
-    console.log(op);
-  }
 
   function disableScroll() {
     // Get the current page scroll position
@@ -89,68 +83,37 @@ window.onload = function () {
     window.onscroll = function () {};
   }
 
-  function addModal(project, i) {
-    let modal_div = document.createElement("div");
-    modal_div.setAttribute("class", "project-item");
-    modal_div.setAttribute("id", `project${i + 1}`);
-    let header_container = document.createElement("div");
-    let project_name = document.createElement("div");
-    project_name.textContent = `${project.title}`;
-    let but = document.createElement("button");
-    but.setAttribute("data-close-button", `project${i + 1}`);
-    but.textContent = `&times;`;
-    but.addEventListener("click", (e) => {
-      const modal = but.closest(".project-item");
-      closeModal(modal);
+  function addModals() {
+    let modalitem = "";
+    projectsArray.forEach((project, i) => {
+      modalitem += `
+      <div class="project-item" id="project${i + 1}">
+        <div class="item-header">
+          <div class="title">${project.title}</div>
+          <button data-close-button class="close-button">&times;</button>
+        </div>
+        <div class="item-body">
+          Lorem ipsum dolor sit amet 
+        </div>
+      </div>`;
     });
-    header_container.appendChild(project_name);
-    header_container.appendChild(but);
-
-    modal_div.appendChild(header_container);
-    let tag_container = document.createElement("div");
-    let tags = "";
-    project.tags.forEach((item) => {
-      tags += `<span>${item}</span>`;
-    });
-    tag_container.innerHTML = tags;
-    modal_div.appendChild(tag_container);
-    let body_container = document.createElement("div");
-    let body = `<p>${project.modaldesc}</p><div><button>See Live</button><button>See Source</button></div>`;
-    body_container.innerHTML = body;
-    modal_div.appendChild(body_container);
-    main.appendChild(modal_div);
+    modals.innerHTML = modalitem;
   }
 
   function addProject() {
-    let fragment = document.createDocumentFragment();
+    let proj = "";
     projectsArray.forEach((project, i) => {
-      addModal(project, i);
-      let div = document.createElement("div");
-      let img = document.createElement("img");
-      img.src = `${project.imageLink}`;
-      let title = document.createElement("p");
-      title.textContent = `${project.title}`;
-      let desc = document.createElement("p");
-      desc.textContent = `${project.description}`;
-      let button = document.createElement("button");
-      button.textContent = "See Project";
-      button.setAttribute("data-modal-target", `#project${i + 1}`);
-
-      button.addEventListener("click", () => {
-        const modal = document.querySelector(button.dataset.modalTarget);
-        openModal(modal);
-      });
-      div.appendChild(img);
-      div.appendChild(title);
-      div.appendChild(desc);
-      div.appendChild(button);
-      fragment.appendChild(div);
+      proj += `<div>
+      <img src="${project.imageLink}" />
+      <p>${project.title}</p>
+      <p>${project.description}</p>
+      <button data-modal-target="#project${i + 1}">See Project</button>
+      </div>`;
     });
-    portfolio.appendChild(fragment);
+    portfolio.innerHTML = proj;
   }
 
   function openModal(modal) {
-    console.log(modal);
     if (modal == null) return;
     modal.classList.add("active");
     active = `#${modal.id}.active`;
@@ -163,7 +126,26 @@ window.onload = function () {
     overlay.classList.remove("active");
   }
 
+  // Function Call
+  addModals();
   addProject();
+
+  // Event Listeners
+  portfolio.addEventListener("click", (e) => {
+    if (e.target.nodeName !== "BUTTON") {
+      return;
+    }
+    const modal = document.querySelector(e.target.dataset.modalTarget);
+    openModal(modal);
+  });
+
+  modals.addEventListener("click", (e) => {
+    if (e.target.nodeName !== "BUTTON") {
+      return;
+    }
+    let modal = e.target.closest(".project-item");
+    closeModal(modal);
+  });
 
   open.addEventListener("click", () => {
     div.style.display = "block";
@@ -185,24 +167,8 @@ window.onload = function () {
     });
   });
 
-  openModalButtons.forEach((link) => {
-    link.addEventListener("click", () => {
-      console.log("clicked");
-      // const modal = document.querySelector(link.dataset.modalTarget);
-      // openModal(modal);
-    });
-  });
-
-  closeModalButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const modal = button.closest(".project-item");
-      closeModal(modal);
-    });
-  });
-
   overlay.addEventListener("click", () => {
     const modals = document.querySelectorAll(active);
-    // console.log(active)
     modals.forEach((modal) => {
       closeModal(modal);
     });
