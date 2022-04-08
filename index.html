@@ -236,6 +236,7 @@
       <div class="contact-details">
         <form
           class="form-details"
+          id="form"
           action="https://formspree.io/f/xjvlodwe"
           method="post"
         >
@@ -252,7 +253,8 @@
               <label for="user-name" class="name-area">User Name</label>
               <input
                 type="text"
-                id="user-name"
+                id="username"
+                name="username"
                 placeholder="Yeremias"
                 maxlength="30"
                 required
@@ -263,16 +265,21 @@
               <input
                 name="email"
                 type="email"
-                id="Email"
+                id="email"
                 placeholder="johndoe@gmail.com"
                 required
               />
             </div>
             <div class="contact-message">
               <label for="message" class="message-area">Message</label>
-              <textarea name="message" id="message" maxlength="500" required>
-Enter your message here</textarea
-              >
+              <textarea
+                name="message"
+                id="message"
+                maxlength="500"
+                rows="5"
+                placeholder="Enter message here"
+                required
+              ></textarea>
             </div>
           </div>
 

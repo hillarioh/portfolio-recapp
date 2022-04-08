@@ -58,6 +58,7 @@ const projectsArray = [
 ];
 
 window.onload = function () {
+  // dom variables
   const div = document.querySelector(".close-page");
   const open = document.querySelector(".open");
   const close = document.querySelector(".close");
@@ -66,7 +67,36 @@ window.onload = function () {
   const portfolio = document.getElementById("portfolio");
   const modals = document.querySelector(".modals");
   const overlay = document.querySelector(".overlay");
+  const email_input = document.getElementById("email");
+  const username_input = document.getElementById("username");
+  const message_input = document.getElementById("message");
+  // non-dom variables
   let active = "";
+  let input = {
+    email: "",
+    username: "",
+    message: "",
+  };
+
+  function checkLocalStorage() {
+    let values = localStorage.getItem("input");
+
+    if (values) {
+      input = JSON.parse(values);
+      email_input.value = input.email;
+      username_input.value = input.username;
+      message_input.value = input.message;
+    } else {
+      localStorage.setItem("input", JSON.stringify(input));
+    }
+  }
+
+  function updateLocalStorage(e) {
+    input = { ...input, [e.target.name]: e.target.value };
+    let serialized = JSON.stringify(input);
+    localStorage.setItem("input", serialized);
+    console.log(localStorage);
+  }
 
   function disableScroll() {
     // Get the current page scroll position
@@ -153,6 +183,7 @@ window.onload = function () {
   }
 
   // Function Call
+  checkLocalStorage();
   addModals();
   addProject();
 
@@ -199,4 +230,10 @@ window.onload = function () {
       closeModal(modal);
     });
   });
+
+  email_input.addEventListener("input", updateLocalStorage);
+
+  username_input.addEventListener("input", updateLocalStorage);
+
+  message_input.addEventListener("input", updateLocalStorage);
 };
