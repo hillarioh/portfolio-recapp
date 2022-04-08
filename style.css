@@ -5,7 +5,14 @@
 body {
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
   margin: 0;
+}
+
+input,
+textarea {
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
 }
 
 main {
@@ -533,16 +540,25 @@ input {
 
 textarea {
   width: 100%;
-  padding: 4rem 0;
+  padding: 1rem;
   border-radius: 10px;
   color: black;
   border: 2px solid red;
+  outline: none;
 }
 
 .contact-button {
   display: flex;
-  margin: 2rem 0;
-  justify-content: center;
+  margin: 1rem 0;
+  flex-direction: column;
+  align-items: center;
+}
+
+#log {
+  color: black;
+  font-size: 16px;
+  margin: 0.5rem 0;
+  font-weight: 700;
 }
 
 input:invalid {
